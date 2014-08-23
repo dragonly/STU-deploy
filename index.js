@@ -1,6 +1,6 @@
 var http = require('http');
 var Emitter = require('events').EventEmitter;
-var helper = require('helper');
+var helper = require('./lib/helper');
 var exec = require('child_process').exec;
 var fs = require('fs');
 
@@ -28,7 +28,7 @@ function GithubDeploy(){
 }
 
 // simplify the POST data from github, only extract what I need
-GithubDeploy.prototype.githubEventHookDataSimplify function(githubEventHookData){
+GithubDeploy.prototype.githubEventHookDataSimplify = function(githubEventHookData){
 	var githubEventHookData = githubEventHookData || {};
 
 	var rRef = /refs\/(heads|tags)\/(.*)$/;
@@ -115,8 +115,9 @@ GithubDeploy.prototype.deploy = function(directory){
 	});
 }
 
-GithubDeploy.prototype.configure(config){
+GithubDeploy.prototype.configure = function(config){
 	this.config = helper.merge(this.config, config);
+	return this;
 }
 
 GithubDeploy.prototype.run = function(){
@@ -126,6 +127,7 @@ GithubDeploy.prototype.run = function(){
 	}
 
 	this.server.listen(this.config.port);
+	console.log('auto deploy server is now running at port ' + this.config.port + ' ... \n');
 }
 
 module.exports.factory = function(){
