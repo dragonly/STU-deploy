@@ -76,6 +76,7 @@ GithubDeploy.prototype.init = function(){
 
 			req.on('end', function(){
 				res.end();
+				dataRaw = JSON.parse(dataRaw);
 				var data = self.githubEventHookDataSimplify(dataRaw);
 				if (data.branch === 'publish'){
 					self.handle(data);
@@ -105,8 +106,9 @@ GithubDeploy.prototype.handle = function(data){
 
 GithubDeploy.prototype.deploy = function(directory){
 	fs.exists(directory, function(exists){
+		console.log(exists, directory);
 		if (exists){
-			exec('cd ' + directory + ' && git pull', function(error, stdout, stderror){
+			exec('cd ' + directory + ' && git pull && git checkout publish', function(error, stdout, stderror){
 				if (error){
 					console.log(error);
 				}
@@ -126,7 +128,7 @@ GithubDeploy.prototype.run = function(){
 		throw 'route must not be empty!';
 	}
 
-	this.server.listen(this.config.port);
+	this.server.listen(this.config.port, '127.0.0.1');
 	console.log('auto deploy server is now running at port ' + this.config.port + ' ... \n');
 }
 
