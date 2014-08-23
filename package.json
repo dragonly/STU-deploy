@@ -1,0 +1,23 @@
+{
+  "name": "STU-deploy",
+  "version": "0.0.1",
+  "description": "This project is initially intended to use github webhook for code deploying for Fudanstu(organization)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dragonly/STU-deploy.git"
+  },
+  "keywords": [
+    "webhook",
+    "deploy"
+  ],
+  "author": "dragonly",
+  "license": "GPL v2",
+  "bugs": {
+    "url": "https://github.com/dragonly/STU-deploy/issues"
+  },
+  "homepage": "https://github.com/dragonly/STU-deploy"
+}
