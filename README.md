@@ -7,7 +7,8 @@ It's based on nodejs
 Usage
 =====
 put this folder in `node_modules` in your node project's directory, and use it as follows
-```js```
+
+```javascript
 var deploy = require('STU-deploy').factory();
 deploy.configure({
     route: {
